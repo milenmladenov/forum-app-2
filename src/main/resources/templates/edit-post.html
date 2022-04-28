@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+   <meta charset="UTF-8">
+   <title>Редактиране</title>
+</head>
+
+<body>
+
+<div layout:fragment="content">
+
+   <div th:if="${notice}" class="flash-message">
+         <h2>[[${notice}]]</h2>
+   </div>
+
+   <a th:href="@{/dashboard}"> &larr; Назад</a>
+   <h2>
+      Редактиране
+   </h2>
+
+   <form action="#" th:action="@{/posts/{id}(id=${post.id})}" th:object="${post}" method="post" class="edit-post-form">
+      <div>
+         <label for="post-title">Заглавие</label>
+         <input type="text" th:field="*{title}" id="post-title" name="post-title"/>
+      </div>
+      <div>
+         <label for="content">Описание</label>
+         <textarea type="text" th:field="*{content}" id="content" name="content" />
+      </div>
+      <div th:if="${post.voteCount == 1}" class="meta">
+         [[${post.voteCount}]] Харесване
+
+         |
+         <a th:href="@{/post/{id}(id=${post.id})}" th:if="${post.comments.size() == 1}">[[${post.comments.size()}]] Коментар</a>
+         <a th:href="@{/post/{id}(id=${post.id})}" th:unless="${post.comments.size() == 1}">[[${post.comments.size()}]] Коментари</a>
+      </div>
+      <div th:unless="${post.voteCount == 1}" class="meta">
+         [[${post.voteCount}]] Харесвания
+         |
+         <a th:href="@{/post/{id}(id=${post.id})}" th:if="${post.comments.size() == 1}">[[${post.comments.size()}]] Коментар</a>
+         <a th:href="@{/post/{id}(id=${post.id})}" th:unless="${post.comments.size() == 1}">[[${post.comments.size()}]] Коментари</a>
+      </div>
+      <button type="submit">Редактиране</button>
+      <button type="button" class="delete-post-btn">Изтриване</button>
+   </form>
+
+
+
+
+   <div th:if="${loggedIn}">
+      <script src="/js/delete-post.js"></script>
+   </div>
+</div>
+
+
+</body>
+</html>

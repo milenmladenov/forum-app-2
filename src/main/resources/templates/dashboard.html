@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+   <meta charset="UTF-8">
+   <title>Dashboard</title>
+</head>
+
+<body>
+
+<div layout:fragment="content">
+
+   <div th:if="${notice}" class="flash-message">
+      <h3>[[${notice}]]</h3>
+   </div>
+
+   <section>
+      <h1>За какво ще пишеш днес ?</h1>
+
+      <form action="/homepage.html" th:action="@{/posts}" th:object="${post}" method="post" class="new-post-form">
+         <div>
+         <label for="post-title">Заглавие</label>
+         <input type="text" th:field="*{title}" id="post-title" name="post-title"/>
+         </div>
+         <div>
+         <label for="content">Описание</label>
+         <textarea type="text" th:field="*{content}" id="content" name="content" />
+         </div>
+         <button type="submit" class="btn" >Създай</button>
+      </form>
+   </section>
+
+
+
+</div>
+
+
+</body>
+</html>

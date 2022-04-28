@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+   <meta charset="UTF-8">
+   <title>Начална страница</title>
+</head>
+
+<body>
+
+   <div layout:fragment="content">
+
+      <div>
+         <a class="new-post" th:href="@{/dashboard}">Нова публикация</a></div>
+      <ol>
+          <li style="list-style:none;" th:each="post : ${listPosts}" class="post-list">
+            <div  th:insert="fragments/post-fragment :: post-fragment"></div>
+         </li>
+      </ol>
+   </div>
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns="http://www.w3.org/1999/html">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">PC Форум</title>
+<!--   <link rel="stylesheet" href="/css/style.css">-->
+   <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+      <nav class="navbar navbar-default" style='background-color: #fff'>
+         <div  class="container-fluid" th:if="${loggedIn}" >
+            <a class="navbar-brand" href="/">PC Форум</a>
+
+            <form class="navbar-form navbar-right" th:action="@{/}">
+               <div class="form-group">
+               <input type="text" name="content" class="form-control" size="50" th:value="${content}" required />
+               </div>
+               <button type="submit" value="Search" class="btn btn-default" th:onclick="form_reset()"/></button>
+
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+            <li><a role="presentation" th:href="@{/postsList}" style="" class="btn active nav navbar-nav navbar-right">Публикувани</a></li>
+               <li> <a role="presentation" th:href="@{/users/logout}" class="btn active nav navbar-nav navbar-right">Изход</a></li>
+            </ul>
+         </div>
+         <div class="container-fluid" th:unless="${loggedIn}">
+            <a  class="navbar-brand" href="/">PC Форум</a>
+            <form class="navbar-form navbar-right" th:action="@{/}">
+               <div class="form-group">
+               <input type="text" name="content" class="form-control" size="50" th:value="${content}" required />
+               <input type="submit" value="Search" class="btn btn-default" th:onclick="form_reset()"/>
+               </div>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+               <li><a th:href="@{/login}" class="btn active nav navbar-nav navbar-right">Вход</a></li>
+            </ul>
+         </div>
+
+      </nav>
+   <main layout:fragment="content">
+
+      <p>This is filled by the content template.</p>
+   </main>
+</div>
+<footer class="footer text-center">
+   <div class="container">
+      <span class="text-muted">© Милен Младенов, Проект по ПИ</span>
+   </div>
+</footer>
+</div>
+<script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/1.12.9-1/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js}"></script>
+</body>
+
+</html>

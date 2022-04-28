@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">Новини</title>
+   <link rel="stylesheet" href="/css/style.css">
+   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<article class="post" th:fragment="post-fragment">
+   <div class="title">
+
+      <h1>
+         <a th:href="@{/post/{id}(id=${post.id})}">[[${post.title}]]</a>
+      </h1>
+      <div>[[${post.content}]]</div>
+      <div><br/></div>
+      Добавено от  <b>[[${post.userName}]]</b> на
+      <span th:text="${#dates.format(post.postedAt, 'MM-dd-YY')}"></span>
+      <div  th:if="${post.voteCount == 1}" class="meta post-like-and-comment">
+         [[${post.voteCount}]] харесване
+         |
+         <a th:href="@{/post/{id}(id=${post.id})}" th:if="${post.comments.size() == 1}">[[${post.comments.size()}]]
+         коментар</a>
+         <a th:href="@{/post/{id}(id=${post.id})}" th:unless="${post.comments.size() == 1}">[[${post.comments.size()}]]
+         коментара</a>
+      </div>
+      <div th:unless="${post.voteCount == 1}" class="meta post-like-and-comment">
+         [[${post.voteCount}]] харесвания
+         |
+         <a th:href="@{/post/{id}(id=${post.id})}" th:if="${post.comments.size() == 1}">[[${post.comments.size()}]]
+            Коментар</a>
+         <a th:href="@{/post/{id}(id=${post.id})}" th:unless="${post.comments.size() == 1}">[[${post.comments.size()}]]
+            Коментара</a>
+      </div>
+   </div>
+</article>
+
+</body>

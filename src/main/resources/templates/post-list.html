@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Вашите постове</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+    <div>
+        <a th:href="@{/dashboard}" class="new-post" >Нова публикация</a>
+    </div>
+    <h2>Вашите постове</h2>
+<section th:if="${postList.size() > 0}">
+
+    <ol style="list-style: none">
+        <li th:each="post : ${postList}">
+            <div th:insert="fragments/post-fragment :: post-fragment"></div>
+            <a th:href="@{/dashboard/edit/{id}(id=${post.id})}" class="edit-link">Редактиране</a>
+        </li>
+    </ol>
+</section>
+</div>
+
+</body>
+</html>

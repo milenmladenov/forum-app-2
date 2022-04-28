@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">PC Форум</title>
+   <link rel="stylesheet" href="/css/style.css">
+   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<article class="comment" th:fragment="comment-fragment">
+   <h1>Коментари</h1>
+   <div class="title" th:each="comment: ${commentList}">
+
+      <li th:text="${comment.commentText}">от  <b>[[${post.userName}]]</b> на <span th:text="${#dates.format(post.postedAt, 'MM-dd-YY')}"></span></li>
+
+   </div>
+</article>
+
+</body>
